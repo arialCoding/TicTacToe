@@ -9,7 +9,12 @@ if(WIN32)
     link_directories(vendor/SDL2/lib)
 endif()
 
+file (GLOB_RECURSE ENGINE_SRCS source/Engine/*.cpp)
+
+add_library(Engine ${ENGINE_SRCS})
+target_include_directories(Engine PUBLIC vendor/SDL2/include source/Engine/include)
+target_link_libraries(Engine PUBLIC ${linkLibs})
 
 add_executable(TicTacToe source/main.cpp)
-target_include_directories(TicTacToe PUBLIC vendor/SDL2/include source/include)
-target_link_libraries(TicTacToe PUBLIC ${linkLibs})
+target_include_directories(TicTacToe PUBLIC vendor/SDL2/include source/Engine/include)
+target_link_libraries(TicTacToe PUBLIC ${linkLibs} Engine)
