@@ -30,9 +30,12 @@ public:
     void Present();
 
     bool isRunning() { return running; }
+    void Quit() { running = false; }
 
     Key* getInput() { return input; }
     Mouse& getMouseState() { return mouse; }
+
+    SDL_Texture* loadTexture(const char* path);
 
 private:
     Engine() {}
