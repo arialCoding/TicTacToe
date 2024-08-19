@@ -6,8 +6,9 @@ set (linkLibs SDL2main SDL2 SDL2_image SDL2_ttf)
 
 if(WIN32)
     set (linkLibs mingw32 ${linkLibs})
-    link_directories(vendor/SDL2/lib)
 endif()
+
+link_directories(vendor/SDL2/lib)
 
 file (GLOB_RECURSE ENGINE_SRCS source/Engine/*.cpp)
 
