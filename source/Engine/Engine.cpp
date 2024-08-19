@@ -45,13 +45,60 @@ bool Engine::Init(int w, int h, const char* title)
 
 void Engine::HandleEvents()
 {
+    for(auto b : input)
+        b.released = 0;
+
+    mouse.LMBreleased = 0;
+    mouse.RMBreleased = 0;
+    mouse.MMBreleased = 0;
+
     while(SDL_PollEvent(&event))
     {
+        mouse.x = event.button.x;
+        mouse.y = event.button.y;
+        
         switch(event.type)
         {
             case SDL_QUIT:
                 running = false;
                 break;
+            //keyboard input
+            case SDL_KEYDOWN:
+                input[event.key.keysym.scancode].pressed = true;
+                break;
+            case SDL_KEYUP:
+                input[event.key.keysym.scancode].pressed = false;
+                input[event.key.keysym.scancode].released = true;
+                break;
+            //mouse input
+            case SDL_MOUSEBUTTONDOWN:
+                if(event.button.button == SDL_BUTTON_LEFT)
+                    mouse.LMBpressed = 1;
+                else if(event.button.button == SDL_BUTTON_RIGHT)
+                    mouse.RMBpressed = 1;
+                else if(event.button.button == SDL_BUTTON_MIDDLE)
+                    mouse.MMBpressed = 1;
+                mouse.x = event.button.x;
+                mouse.y = event.button.y;
+                break;
+            case SDL_MOUSEBUTTONUP:                
+                if(event.button.button == SDL_BUTTON_LEFT)
+                {
+                    mouse.LMBpressed = 0;
+                    mouse.LMBreleased = 1;
+                }
+                else if(event.button.button == SDL_BUTTON_LEFT)
+                {
+                    mouse.LMBpressed = 0;
+                    mouse.LMBreleased = 1;
+                }
+                else if(event.button.button == SDL_BUTTON_LEFT)
+                {
+                    mouse.LMBpressed = 0;
+                    mouse.LMBreleased = 1;
+                }
+                break;
+
             default:
                 break;
         }

@@ -2,6 +2,19 @@
 
 #include <SDL2/SDL.h>
 
+struct Key{
+    bool pressed = false;
+    bool released = false;
+};
+
+struct Mouse{
+    bool RMBpressed = false, RMBreleased = false;
+    bool LMBpressed = false, LMBreleased = false;
+    bool MMBpressed = false, MMBreleased = false;
+
+    int x, y;
+};
+
 class Engine
 {
 public:
@@ -18,6 +31,9 @@ public:
 
     bool isRunning() { return running; }
 
+    Key* getInput() { return input; }
+    Mouse& getMouseState() { return mouse; }
+
 private:
     Engine() {}
 
@@ -30,4 +46,6 @@ private:
 
     bool running = false;
 
+    Key input[256];
+    Mouse mouse;
 };

@@ -15,6 +15,10 @@ add_library(Engine ${ENGINE_SRCS})
 target_include_directories(Engine PUBLIC vendor/SDL2/include source/Engine/include)
 target_link_libraries(Engine PUBLIC ${linkLibs})
 
+add_library(Game source/Game/Game.cpp)
+target_include_directories(Game PUBLIC vendor/SDL2/include source/Engine/include)
+target_link_libraries(Game PUBLIC ${linkLibs} Engine)
+
 add_executable(TicTacToe source/main.cpp)
 target_include_directories(TicTacToe PUBLIC vendor/SDL2/include source/Engine/include)
-target_link_libraries(TicTacToe PUBLIC ${linkLibs} Engine)
+target_link_libraries(TicTacToe PUBLIC ${linkLibs} Engine Game)
