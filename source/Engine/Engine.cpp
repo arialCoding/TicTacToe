@@ -110,14 +110,14 @@ SDL_Texture* Engine::loadTexture(const char* path)
     SDL_Surface* temp = IMG_Load(path);
     if(!temp)
     {
-        printf("failed to load surface from file %s. Err: %s\n", path, SDL_GetError);
+        printf("failed to load surface from file %s. Err: %s\n", path, SDL_GetError());
         return nullptr;
     }
 
     SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, temp);
     if(!tex)
     {
-        printf("failed to Create texture from file %s. Err: %s\n", path, SDL_GetError);
+        printf("failed to Create texture from file %s. Err: %s\n", path, SDL_GetError());
         return nullptr;
     }
 
